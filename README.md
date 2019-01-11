@@ -141,8 +141,8 @@ In future, other values may be supported, such as 'contribution' for contributio
 pages.
 
 ### [page-id]
-Must be an event ID. Rules in this section will only be applied to the events with
-this ID.
+Must be an event (or contribution page) ID. Rules in this section will only be applied to the events with
+this ID.  You can also specify `'all'` to apply the rule to all events (or contribution types).
 
 ### [rule-name]
 Must be a unique string within this page-type/page-id section.

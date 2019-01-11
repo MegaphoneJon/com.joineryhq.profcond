@@ -23,8 +23,10 @@ function profcond_civicrm_buildForm($formName, &$form) {
   if ($useConditionals) {
     $pageId = $form->get('id');
     $config = _profcond_get_search_config();
-    // Only take action if we're configured to act on this event.
-    if ($pageConfig = CRM_Utils_Array::value($pageId, $config[$useConditionals])) {
+    // Only take action if we're configured to act on this page (or all pages).
+    $pageConfig = $config[$useConditionals]['all'] ?: [];
+    $pageConfig = array_merge($pageConfig, CRM_Utils_Array::value($pageId, $config[$useConditionals], []));
+    if ($pageConfig) {
       CRM_Core_Resources::singleton()->addScriptFile('com.joineryhq.profcond', 'js/profcond.js');
       CRM_Core_Resources::singleton()->addVars('profcond', array(
         'pageConfig' => $pageConfig,
