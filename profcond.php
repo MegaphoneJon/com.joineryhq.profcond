@@ -32,6 +32,7 @@ function profcond_civicrm_buildForm($formName, &$form) {
         'pageConfig' => $pageConfig,
         'formId' => $form->_attributes['id'],
       ));
+      CRM_Core_Region::instance('page-body')->add(['template' => 'CRM/common/notifications.tpl']);
       // Add a hidden field for transmitting names of dynamically hidden fields.
       $form->add('hidden', 'profcond_hidden_fields', NULL, array('id' => 'profcond_hidden_fields'));
       // Take specific action when form has been submitted.

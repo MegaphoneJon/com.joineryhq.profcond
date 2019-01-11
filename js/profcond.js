@@ -223,14 +223,15 @@
     // If "label" is defined, use the id that the label corresponds to.
     // TODO: Escape quotation marks if they appear in the label.
     if (typeof condition.label != 'undefined') {
-      //Escape
-      condition.label =
       condition.id = CRM.$("label:contains(" + condition.label + ")").attr('for');
     }
     if (typeof condition.id != 'undefined') {
       el = CRM.$('#' + condition.id);
     } else if (typeof condition.selector != 'undefined') {
       el = CRM.$(condition.selector);
+    }
+    if (!el.length) {
+      showAdministratorAlert('This ID isn\'t present on the form: ' + JSON.stringify(condition), 'Profile Conditional Error', 'error');
     }
     return el;
   };
@@ -262,6 +263,13 @@
   // Add submit handler to form, to pass compiled list of hidden fields with submission.
   CRM.$('form#' + CRM.vars.profcond.formId).submit(profcondStoreHidden);
 
+  // Show an alert to logged in administrators only.
+  function showAdministratorAlert(message, title, type, options) {
+    //Do an API call that only administrators will return successfully.
+    CRM.api3('System', 'get').done(function (result) {
+      CRM.alert(message, title, type, options);
+    });
+  }
 })(CRM.$, CRM.ts('com.joineryhq.profcond'));
 
 
