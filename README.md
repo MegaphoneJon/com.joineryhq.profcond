@@ -112,7 +112,7 @@ $civicrm_setting['com.joineryhq.profcond']['com.joineryhq.profcond'] = array(
         'conditions' => array(
           '[condition-type]' => array(
             array(
-              'id' => '[field-id]',
+              'id' => '[field-id]', //or 'label' => '[label-text]'
               'op' => '[operator]',
               'value' => '[field-value]',
             ),
@@ -161,6 +161,9 @@ or `all_of`, containing any number of conditions.
 
 ### [field-id]
 The HTML "id" attribute of the field to be tested in this condition.
+
+### [label-text]
+The text of the label of the field to be tested in this condition.  Mutually exclusive with using `'id' => '[field-id]'`.
 
 ### [operator]
 The type of comparison to be performed for this field. One of:
