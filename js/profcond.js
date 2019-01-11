@@ -190,6 +190,9 @@
         el = CRM.$('fieldset.crm-profile-id-' + id);
         break;
     }
+    if (!el || !el.length) {
+      showAdministratorAlert('This ID isn\'t present on the form: ' + id, 'Profile Conditional Error', 'error');
+    }
     return el;
   };
 
@@ -230,8 +233,9 @@
     } else if (typeof condition.selector != 'undefined') {
       el = CRM.$(condition.selector);
     }
-    if (!el.length) {
-      showAdministratorAlert('This ID isn\'t present on the form: ' + JSON.stringify(condition), 'Profile Conditional Error', 'error');
+    if (!el || !el.length) {
+      delete condition.op;
+      showAdministratorAlert('This element isn\'t present on the form: ' + JSON.stringify(condition), 'Profile Conditional Error', 'error');
     }
     return el;
   };
