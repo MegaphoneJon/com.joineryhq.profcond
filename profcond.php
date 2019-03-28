@@ -13,6 +13,7 @@ function profcond_civicrm_buildForm($formName, &$form) {
   $useConditionals = FALSE;
   switch ($formName) {
     case 'CRM_Event_Form_Registration_Register':
+    case 'CRM_Event_Form_Registration_AdditionalParticipant':
       $useConditionals = 'event';
       break;
 
@@ -75,8 +76,10 @@ function profcond_civicrm_buildForm($formName, &$form) {
  * Implements hook_civicrm_validateForm().
  */
 function profcond_civicrm_validateForm($formName, &$fields, &$files, &$form, &$errors) {
-  // Re-add tempoarily unrequired fields to the list of required fields.
-  $form->_required = array_merge($form->_required, $form->_attributes['temporarilyUnrequiredFields']);
+  if (array_key_exists('temporarilyUnrequiredFields', $form->_attributes)) {
+    // Re-add tempoarily unrequired fields to the list of required fields.
+    $form->_required = array_merge($form->_required, $form->_attributes['temporarilyUnrequiredFields']);
+  }
 }
 
 /**
