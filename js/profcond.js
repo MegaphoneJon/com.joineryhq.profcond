@@ -223,8 +223,6 @@
     // If "label" is defined, use the id that the label corresponds to.
     // TODO: Escape quotation marks if they appear in the label.
     if (typeof condition.label != 'undefined') {
-      //Escape
-      condition.label =
       condition.id = CRM.$("label:contains(" + condition.label + ")").attr('for');
     }
     if (typeof condition.id != 'undefined') {
